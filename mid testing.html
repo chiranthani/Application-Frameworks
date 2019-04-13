@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Insert title here</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+        x = 1;
+        console.log('x = ' + x);
+        var x = 2;
+
+        //Answer: x=1
+
+        //-----------------------------------------
+        x = "Peter";
+        console.log('x = ' + x);
+
+        //Answer: x = Peter
+        //-----------------------------------------
+        var x;
+        console.log('x = ' + x);
+
+        //Answer: x = undefined
+
+        //-------------------------------------
+        var x = 0;
+        do { console.log(x) } while (x > 0)
+
+        //Answer: 0
+        //-----------------------------------------------
+        var vOne;
+        vOne = 12;
+        console.log(vOne);
+
+        vOne = "SLIIT";
+        console.log(vOne);
+
+        vOne = "12K";
+        console.log(vOne);
+
+        //   Answer: 12  SLIIT 12K
+        //-----------------------------------------
+        function print() {
+            console.log("Demo test");
+        }
+        print();
+        // Answer : Demo test
+        //------------------------------------------
+
+        function add(a, b) {
+            return a + b;
+        }
+
+        console.log(add(2, 3, 1));
+        //Answer : 5
+        //------------------------------------------
+        var vOne;
+        vOne = function () {
+            console.log("My Message");
+        }
+        vOne();
+        //Answer: My Message 
+
+        //---------------------------------------
+        var vOne;
+        var vTwo = "Second Variable";
+
+        vOne = function (data) {
+            console.log(data);
+        }
+
+        vOne(vTwo);
+        //Answer: Second Variable 
+
+        //---------------------------------------
+        var vOne;
+        var vTwo;
+
+        vOne = function (myFun) {
+            myFun();
+        }
+        vTwo = function () {
+            console.log("I am second function");
+        }
+
+        vOne(vTwo);
+
+        //Answer : I am second function
+        //--------------------------------------------
+        var vOne = function () {
+            var vTwo = function () {
+                console.log("I'm inner");
+            }
+            return vTwo;
+        }
+
+        var vThree = vOne();
+        vThree();
+
+        //Answer : I'm inner
+        //--------------------------------------------
+        var amount = 10; // outer variable
+        var vehicle = {
+            amount: 1000,
+            id: 1,
+            printAmount: function () {
+                console.log(this.amount); // this keyword get json object amount
+            }
+        };
+
+        vehicle.amount = 2000000; // json object amonut
+
+        vehicle.printAmount();
+        //Answer : 2000000
+
+
+        //---------------------------------------------------
+        var vehicleName = "Toyota";
+
+        function demoFunction() {
+            var vehicleName = "Nissan";
+            console.log(vehicleName);
+
+        }
+
+        demoFunction();
+        //Answer : Nissan
+
+        //----------------------------------------------------
+        var vehicleName = "Toyota";
+        var b = function demoFunction() {
+            var a = function ff() {
+                console.log(this.vehicleName);
+            }
+            return a;
+        }
+
+        var c = b();
+        c();
+        //Answer : Toyota
+        //----------------------------------------------------
+        var vehicleName = "Toyota";
+        /* var printName = function () {
+             console.log("Vehicle name is " + this.vehicleName);
+         }*/
+
+        var vehicle = {
+            vehicleName: "Nissan",
+            amount: 1000,
+            getVehicleName: function () {
+                console.log("Vehicle name is " + this.vehicleName);
+            }
+        }
+        vehicle.getVehicleName();
+
+        //Answer : Vehicle name is Nissan
+        //-----------------------------------------------
+
+        var vehicleName = "Toyota";
+
+        var printName = function () {
+            console.log("Vehicle name is " + this.vehicleName);
+        }
+        var vehicleTwo = {
+            vehicleName: "TATA",
+            amount: 5000
+        }
+
+        var aa = {
+            vehicleName: "cccccc"
+        }
+        var vehicle = {
+            vehicleName: "Nissan",
+            amount: 1000,
+            getVehivcleName: printName.bind(vehicleTwo)
+        }
+        vehicle.getVehivcleName();
+
+        //Answer : Vehicle name is TATA
+        // ------------------------------------------
+        var vehicleName = "Toyota";
+        var printName = function () {
+            console.log("vehicle name is " + this.vehicleName);
+        }
+        var vehicleTwo = {
+            vehicleName: "TATA",
+            amount: 5000
+        }
+        var vehicle = {
+            vehicleName: "Nissan",
+            amount: 1000,
+            getVehivcleName: printName
+        }
+
+        vehicle.getVehivcleName = vehicle.getVehivcleName.bind(vehicleTwo);
+        vehicle.getVehivcleName();
+        vehicle.getVehivcleName.call(vehicle);
+
+        //Answer : Vehicle name is TATA    // without this keyword display Toyota
+        //         Vehicle name is TATA
+
+        //-------------------------------------------------------
+        /* class student 
+           witout this keyword - display error message
+        */
+        var student = function () {
+            this.name;
+            this.age;
+            this.idNo;
+            this.printDetails = function () {
+                console.log("Name : " + this.name);
+                console.log("Age : " + this.age);
+                console.log("ID no : " + this.idNo);
+            }
+        }
+
+        // create student class object myStudent
+        var myStudent = new student();
+        myStudent.name = "Kamal";
+        myStudent.age = 12;
+        myStudent.idNo = "IT123";
+        myStudent.printDetails();
+
+        //Answers: Name : Kamal  
+        //         Age : 12
+        //         ID no : IT123
+        /// -----------------------------------------
+        var Student = function () {
+            this.name;
+            this.age;
+            this.idNo;
+            this.printDetails = function () {
+                console.log("Name : " + this.name);
+                console.log("Age : " + this.age);
+                console.log("ID no : " + this.idNo);
+                console.log("Gender : " + this.gender);
+            }
+        }
+
+        // append the gender proprety using prototype keyword
+        Student.prototype.gender = "Male";
+
+        var myStudent = new Student();
+        myStudent.name = "Kamal";
+        myStudent.age = 12;
+        myStudent.idNo = "IT123";
+        myStudent.printDetails();
+
+        //Answers: Name : Kamal  
+        //         Age : 12
+        //         ID no : IT123
+        //         Gender : Male
+        ///----------------------------------------------------
+
+        // USING prototype & constructor KEYWORD (INHERITNA)
+        function Vehicle() {
+            this.amount = 1000;
+        }
+        Vehicle.prototype.setAmount = function (amount) {
+            this.amount = amount;
+        };
+
+        Vehicle.prototype.getAmount = function (amount) {
+            return this.amount;
+        };
+
+        function Car() {
+            Vehicle.call(this);
+        }
+
+        Car.prototype = Object.create(Vehicle.prototype);
+        Car.prototype.constructor = Car;
+
+        const car = new Car();
+        console.log(car.amount);
+
+        // Answer : 1000
+
+        //---------------------------------------------------------
+        //closure
+
+        function taxCalculator(tax) {
+            var taxPercentage = tax;
+            return function (amount) {
+                return amount * tax / 100
+            }
+        }
+        var calculator = taxCalculator(10);
+        console.log(calculator(90));
+        // Answer : 9
+        //-----------------------------------------------------------
+        //create Person Class & using prototype keyword and display the name in alert 
+        var Person = function (fname, lname, age) {
+            this.fname = fname;
+            this.lname = lname;
+            this.age = age;
+
+        };
+
+        person = new Person("John", "Doe", "40");
+
+        Person.prototype.sayHello = function () {
+            alert("Hello " + this.fname + " " + this.lname);
+        };
+
+        person.sayHello();
+        //------------------------------------------------------------------------
+        //Above example using js object
+
+        var person = {
+            fname: "John",
+            lname: "Doe",
+            age: "50"
+        };
+
+        person.sayHello = function () {
+            alert("Hello " + this.fname + " " + this.lname);
+        };
+        person.sayHello();
+        //----------------------------------------------------------------------------------
+        var firstName = "Peter",
+            lastName = "Ally";
+
+        function showFullName() {
+            // "this" inside this function will have the value of the window object
+            // because the showFullName () function is defined in the global scope, just like the firstName and lastName
+            console.log(this.firstName + " " + this.lastName);
+        }
+
+        var person = {
+            firstName: "Penelope",
+            lastName: "Barrymore",
+            showFullName: function () {
+                // "this" on the line below refers to the person object, because the showFullName function will be invoked by person object.
+                console.log(this.firstName + " " + this.lastName);
+            }
+        }
+
+        showFullName(); // Peter Ally
+
+        // window is the object that all global variables and functions are defined on, hence:
+        window.showFullName(); // Peter Ally
+
+        // "this" inside the showFullName () method that is defined inside the person object still refers to the person object, hence:
+        person.showFullName(); // Penelope Barrymore
+
+//----------------------------------------------------------------------------------------------------------------------------
+
+       /** What is eval() in JavaScript ?
+            It executes specified string as JavaScript code.
+
+            Netscape is the software company who developed JavaScript.
+            6 primitive data types: string, 
+                                    number, 
+                                    boolean,
+                                    null,
+                                    undefined, 
+                                    symbol(new in ECMAScript 2015)
+
+         "==" checks only for equality in value whereas "===" is a stricter equality test and
+          returns false if either the value or the type of the two variables are different.
+
+        search() − Executes the search for a match between a regular expression and a specified string.
+        toLocaleString() − Returns a string value version of the current number in a format that may vary according to a browser's locale settings.
+
+     
+        toString() method returns the string representation of the number's value.
+**/
+
+    </script>
+</body>
+
+</html>
